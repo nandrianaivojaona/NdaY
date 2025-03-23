@@ -1,0 +1,363 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: url('assets/images/NdaY_community.png') no-repeat center center fixed;
+    background-size: auto;
+    background-color: transparent; /* Fallback color */
+}
+
+/* Hero and Dynamic Background Section */
+.hero-dynamic {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.dynamic-background {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.fixed-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: fit-content;
+    background: url('assets/images/NdaY_community.png') no-repeat center center;
+    background-size: cover;
+    background-color: transparent; /* Fallback color */
+    z-index: -1;
+}
+
+.rotating-globe {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 100%;
+    animation: rotateGlobe 30s linear infinite;
+    perspective: 1000px;
+}
+
+.globe-image {
+    width: auto;
+    height: 100%;
+    opacity: 0.5;
+}
+
+.dropping-smartphone {
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: auto;
+    animation: dropIn 30s ease-in-out infinite;
+}
+
+.smartphone-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 1;
+    background-color: transparent;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    color: #596376;
+    position: relative; /* Ensure it stays in the document flow */
+    z-index: 1; /* Ensure it appears above other elements */
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.hero .btn {
+    background: #fff;
+    color: #007BFF;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.hero .btn:hover {
+    background: #0056b3;
+    color: rgb(190, 245, 176);
+}
+
+/* Animations */
+@keyframes rotateGlobe {
+    from {
+        transform: translate(-50%, -50%) rotateY(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotateY(360deg);
+    }
+}
+
+@keyframes dropIn {
+    0% {
+        transform: translateY(-150%) translateX(-50%);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(-50%) translateX(-50%);
+        opacity: 0.6;
+    }
+}
+
+/* Sections */
+section {
+    position: relative;
+    padding: 50px 0;
+    text-align: center;
+}
+
+/* Project Card */
+.project-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(33.33% - 20px);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: visible;
+    margin-bottom: 20px;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.project-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Project Details */
+.project-details {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 20px);
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    transition: opacity 0.3s ease, left 0.3s ease;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+}
+
+.project-card:hover .project-details {
+    opacity: 1;
+    left: calc(100% + 10px);
+    pointer-events: auto;
+}
+
+.project-image-container {
+    width: 600px;
+    height: auto;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.project-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-text {
+    background: rgba(228, 217, 217, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: auto;
+    box-sizing: border-box;
+    display: flex;
+    align-items: left;
+    height: 100%;
+}
+
+.testimonial-box {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: calc(100% + 20px);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    max-width: 100%;
+    z-index: 1000;
+}
+
+.project-card:hover .testimonial-box {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-details {
+        flex-direction: column;
+        left: 0;
+        top: 100%;
+        margin-top: 20px;
+    }
+
+    .project-image-container,
+    .project-text,
+    .testimonial-box {
+        flex-basis: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-card {
+        width: 100%;
+    }
+
+    .project-details {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .project-image-container,
+    .project-text,
+    .testimonial-box {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Contact Section */
+.contact form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.contact input, .contact textarea {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.contact .btn {
+    background: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact .btn:hover {
+    background: #0056b3;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* NdaY' Image Alignment */
+.ndai-word {
+    display: inline-block;
+    vertical-align: baseline;
+    font-size: inherit;
+    line-height: inherit;
+    width: 1em;
+    height: 1em;
+    background: url('assets/images/NdaY_word.png') no-repeat center center;
+    background-size: contain;
+    margin: 0 0.1em;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+h1 .ndai-word,
+h2 .ndai-word,
+h3 .ndai-word {
+    height: calc(1.5em + 0.3em);
+}
+
+button .ndai-word {
+    height: calc(1em + 0.1em);
+    margin: 0 0.2em;
+}
+
+@media (max-width: 768px) {
+    .ndai-word {
+        width: 0.8em;
+        height: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .ndai-word {
+        width: 0.6em;
+        height: 0.6em;
+    }
+}
+
+.ndai-word:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
