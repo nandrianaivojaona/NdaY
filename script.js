@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const replacementHtml = `
                     <img 
-                        src="assets/images/NdaY_Word.png" 
+                        src="assets/images/NdaY_word.png" 
                         alt="NdaY'" 
                         style="width: ${imgWidth}px; height: ${imgHeight}px; vertical-align: baseline;" 
                         class="ndai-word"
