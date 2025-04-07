@@ -1,363 +1,463 @@
-/* General Reset */
-* {
+/* ======================
+   General Reset & Variables
+   ====================== */
+   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --menu-item-width: 150px;
+    --menu-item-height: 50px;
+    --submenu-width: 200px;
+    --primary-color: #333;
+    --secondary-color: #666;
+    --highlight-color: rgba(0, 123, 255, 0.8);
+    --background-color: #f9f9f9;
+}
+
+/* ======================
+   Typography & Fonts
+   ====================== */
+/* Add this at the top of your style.css */
+@font-face {
+    font-family: 'LuluFontTH';
+    src: url('assets/fonts/LuluFontTH-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LuluFontTH';
+    src: url('assets/fonts/LuluFontTH-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'LuluFontTH', sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: var(--primary-color);
     background: url('assets/images/NdaY_community.png') no-repeat center center fixed;
-    background-size: auto;
-    background-color: transparent; /* Fallback color */
+    background-size: cover;
+    overflow: visible; /* Ensure submenus are not clipped */
+    z-index: 1; /* Ensure it stays behind the top section */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
-
-/* Hero and Dynamic Background Section */
-.hero-dynamic {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
+/* ======================
+   Hero Section
+   ====================== */
+   .hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: none;
+    color: var(--primary-color);
+    position: relative; /* Needed for absolute positioning of children */
+    min-height: 300px; /* Ensure space for content */
+    z-index: 10; /* Higher than footer */
+    overflow: visible; /* Ensure submenus are not clipped */
+    display: flex;
+    flex: 1; /* Takes available space */
+    padding-bottom: 50px; /* Space before footer */
 }
-
+/* Dynamic Background */
+/*
 .dynamic-background {
     position: relative;
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    z-index: 1000; 
+    transition: opacity 0.3s ease, visibility 0.3s ease; 
+}
+*/
+.dynamic-background.hidden {
+    opacity: 0; /* Make the background invisible */
+    visibility: hidden; /* Prevent interaction with the background */
 }
 
-.fixed-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+/* ======================
+   Footer Section
+   ====================== */
+   footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    position: relative;
     bottom: 0;
-    height: fit-content;
-    background: url('assets/images/NdaY_community.png') no-repeat center center;
-    background-size: cover;
-    background-color: transparent; /* Fallback color */
-    z-index: -1;
+    width: 100%;
+    z-index: 1000; /* Ensure it stays on top */
+    margin-top: auto; /* Pushes footer down */
+}
+footer p {
+    font-size: 0.9rem;
+    margin: 0;
 }
 
+
+/* ======================
+   Header Section
+   ====================== */
+header {
+    font-family: 'LuluFontTH', sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Top Section with Unified Background */
+.top-section {
+    position: relative;
+    width: auto;
+    height: 200px; /* Adjust height as needed */
+    overflow: hidden;
+    z-index: 1000; /* Ensure it stays on top */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: left;
+}
+
+/* Top Content (Welcome word + Logo. Tagline Text under them) */
+/* Header Layout */
+.top-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.top-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Welcome section styling */
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.welcome-line {
+    font-family: 'LuluFontTH', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.welcome-text {
+    font-family: 'LuluFontTH', sans-serif !important;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.tagline {
+    font-family: 'LuluFontTH', sans-serif !important;
+    font-size: 1.3rem;
+    color: #666;
+    margin: 0;
+    padding-left: 10px;
+    letter-spacing: 0.5px;
+}
+
+.logo-image {
+    height: 60px; /* Adjust as needed */
+    width: auto;
+    margin-left: 10px;
+}
+
+.horizontal-menu {
+    margin-left: auto;
+}
+/* ======================
+   Horizontal Menu
+   ====================== */
+.horizontal-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Ensure submenus are positioned relative to this */
+    z-index: 1000;
+}
+
+.menu-item {
+    background: none;
+    border: none;
+    font-family: 'LuluFontTH', sans-serif;
+    font-size: 1rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: var(--menu-item-width);
+    height: var(--menu-item-height);
+    z-index: inherit;
+}
+/* Add these fixes to your CSS */
+.hero {
+    position: relative;
+    min-height: 60vh; /* Adjust as needed */
+    padding: 20px;
+}
+
+.menu-item-container {
+    position: relative;
+    display: inline-block;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1001;
+    border-radius: 4px;
+}
+
+.submenu.show {
+    display: block;
+}
+
+
+/* Menu Item Container */
+
+.submenu-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px; /* Adjust as needed */
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: block !important; /* Force show */
+}
+.submenu-container.show {
+    display: block;
+}   
+.menu-item-container {
+    position: relative; /* Submenu will be positioned relative to this */
+    margin: 0 10px;
+}
+
+.submenu-item {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'LuluFontTH', sans-serif;
+    font-size: 1rem;
+    color: var(--primary-color);
+    transition: background-color 0.3s ease;
+    z-index: inherit;
+}
+
+.submenu-item:hover {
+    background-color: #f0f0f0;
+}
+
+.submenu-item-container {
+    position: relative;
+    display: inline-block;
+}
+
+
+
+/* ======================
+   Content Container
+   ====================== */
+.content-container {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    background: white;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.content-container.show {
+    display: block;
+}
 .rotating-globe {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 0%;
+    left: 0%;
+    transform-origin: center;
     transform: translate(-50%, -50%);
-    width: auto;
-    height: 100%;
-    animation: rotateGlobe 30s linear infinite;
+    width: 100%;
+    height: auto;
+    animation: spin 10s infinite linear;
     perspective: 1000px;
 }
 
 .globe-image {
-    width: auto;
-    height: 100%;
-    opacity: 0.5;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .dropping-smartphone {
     position: fixed;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40%;
+    top: 20%;
+    left: 70%;
+    transform: translateX(-50%);
+    width: 100%;
     height: auto;
-    animation: dropIn 30s ease-in-out infinite;
+    z-index: 2;
+    animation: drop-sync 10s ease-in-out infinite;
 }
 
 .smartphone-image {
-    width: 100%;
+    width: 70%;
     height: auto;
     display: block;
     opacity: 1;
     background-color: transparent;
 }
-
-/* Hero Section */
-.hero {
+.project-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    padding: 100px 20px;
-    color: #596376;
-    position: relative; /* Ensure it stays in the document flow */
-    z-index: 1; /* Ensure it appears above other elements */
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-}
-
-.hero .btn {
-    background: #fff;
-    color: #007BFF;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.hero .btn:hover {
-    background: #0056b3;
-    color: rgb(190, 245, 176);
-}
-
-/* Animations */
-@keyframes rotateGlobe {
-    from {
-        transform: translate(-50%, -50%) rotateY(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotateY(360deg);
-    }
-}
-
-@keyframes dropIn {
-    0% {
-        transform: translateY(-150%) translateX(-50%);
-        opacity: 0.2;
-    }
-    100% {
-        transform: translateY(-50%) translateX(-50%);
-        opacity: 0.6;
-    }
-}
-
-/* Sections */
-section {
-    position: relative;
-    padding: 50px 0;
-    text-align: center;
-}
-
-/* Project Card */
-.project-card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.9);
+    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
-    width: calc(33.33% - 20px);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: visible;
-    margin-bottom: 20px;
-}
-
-.project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-.project-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.project-card p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 10px;
-}
-
-/* Project Details */
-.project-details {
-    position: absolute;
-    top: 0;
-    left: calc(100% + 20px);
-    display: flex;
-    align-items: stretch;
-    gap: 10px;
-    transition: opacity 0.3s ease, left 0.3s ease;
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0;
-}
-
-.project-card:hover .project-details {
-    opacity: 1;
-    left: calc(100% + 10px);
-    pointer-events: auto;
-}
-
-.project-image-container {
-    width: 600px;
-    height: auto;
-    overflow: hidden;
-    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
 }
 
 .project-image {
-    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.project-text {
-    background: rgba(228, 217, 217, 0.9);
-    border: 1px solid #ddd;
+    max-width: 300px;
+    height: auto;
     border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: auto;
-    box-sizing: border-box;
-    display: flex;
-    align-items: left;
-    height: 100%;
+    margin-bottom: 20px;
 }
 
-.testimonial-box {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: calc(100% + 20px);
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    max-width: 100%;
-    z-index: 1000;
+.project-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
 }
 
-.project-card:hover .testimonial-box {
-    display: block;
-    animation: fadeIn 0.3s ease-in-out;
+.project-box p {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
 }
 
-@keyframes fadeIn {
+.project-box em {
+    font-style: italic;
+    color: var(--highlight-color);
+}
+
+
+
+/* Add to your CSS */
+.dynamic-background.paused {
+    animation-play-state: paused;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+/* Ensure Lulu font is applied */
+.welcome-line h1,
+.tagline {
+    font-family: 'Lulu', sans-serif;
+}
+
+/* Make the globe animation smoother */
+.rotating-globe {
+    animation: spin 20s infinite linear;
+}
+
+/* ======================
+   Media Queries
+   ====================== */
+@media (max-width: 768px) {
+    .horizontal-menu {
+        display: none; /* Hide the menu on smaller screens */
+    }
+
+    .menu-toggle {
+        display: block; /* Show the hamburger menu icon */
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+    }
+
+    .horizontal-menu.show {
+        display: flex; /* Show the menu when toggled */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* ======================
+   Keyframes
+   ====================== */
+@keyframes spin {
     from {
-        opacity: 0;
+        transform: rotateY(0deg);
     }
     to {
+        transform: rotateY(70deg);
+    }
+}
+
+@keyframes drop-sync {
+    0% {
+        transform: translate(-50%, -200px);
+        opacity: 0.5;
+    }
+    25% {
+        transform: translate(-50%, 200px);
         opacity: 1;
     }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .project-details {
-        flex-direction: column;
-        left: 0;
-        top: 100%;
-        margin-top: 20px;
+    40% {
+        transform: translate(-50%, 100px);
+        opacity: 1;
     }
-
-    .project-image-container,
-    .project-text,
-    .testimonial-box {
-        flex-basis: 100%;
-        margin-bottom: 10px;
+    50% {
+        transform: translate(-50%, 200px);
+        opacity: 1;
     }
-}
-
-@media (max-width: 480px) {
-    .project-card {
-        width: 100%;
+    100% {
+        transform: translate(-50%, 200px);
+        opacity: 0;
     }
-
-    .project-details {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .project-image-container,
-    .project-text,
-    .testimonial-box {
-        flex-basis: 100%;
-        max-width: 100%;
-    }
-}
-
-/* Contact Section */
-.contact form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.contact input, .contact textarea {
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.contact .btn {
-    background: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.contact .btn:hover {
-    background: #0056b3;
-}
-
-/* Footer */
-footer {
-    background: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-
-/* NdaY' Image Alignment */
-.ndai-word {
-    display: inline-block;
-    vertical-align: baseline;
-    font-size: inherit;
-    line-height: inherit;
-    width: 1em;
-    height: 1em;
-    background: url('assets/images/NdaY_word.png') no-repeat center center;
-    background-size: contain;
-    margin: 0 0.1em;
-    text-indent: -9999px;
-    overflow: hidden;
-}
-
-h1 .ndai-word,
-h2 .ndai-word,
-h3 .ndai-word {
-    height: calc(1.5em + 0.3em);
-}
-
-button .ndai-word {
-    height: calc(1em + 0.1em);
-    margin: 0 0.2em;
-}
-
-@media (max-width: 768px) {
-    .ndai-word {
-        width: 0.8em;
-        height: 0.8em;
-    }
-}
-
-@media (max-width: 480px) {
-    .ndai-word {
-        width: 0.6em;
-        height: 0.6em;
-    }
-}
-
-.ndai-word:hover {
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
 }
