@@ -1,37 +1,23 @@
-/* ======================
-   General Reset & Variables
-   ====================== */
-   * {
+/* ===== BASE STYLES ===== */
+:root {
+    --primary-color: #333;
+    --secondary-color: #666;
+    --highlight-color: rgba(0, 123, 255, 0.8);
+    --background-color: #f9f9f9;
+    --menu-width: 150px;
+    --menu-height: 50px;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root {
-    --menu-item-width: 150px;
-    --menu-item-height: 50px;
-    --submenu-width: 200px;
-    --primary-color: #333;
-    --secondary-color: #666;
-    --highlight-color: rgba(0, 123, 255, 0.8);
-    --background-color: #f9f9f9;
-}
-
-/* ======================
-   Typography & Fonts
-   ====================== */
-/* Add this at the top of your style.css */
 @font-face {
     font-family: 'LuluFontTH';
     src: url('assets/fonts/LuluFontTH-Regular.ttf') format('truetype');
     font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'LuluFontTH';
-    src: url('assets/fonts/LuluFontTH-Bold.ttf') format('truetype');
-    font-weight: bold;
     font-style: normal;
 }
 
@@ -41,160 +27,59 @@ body {
     color: var(--primary-color);
     background: url('assets/images/NdaY_community.png') no-repeat center center fixed;
     background-size: cover;
-    overflow: visible; /* Ensure submenus are not clipped */
-    z-index: 1; /* Ensure it stays behind the top section */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
-/* ======================
-   Hero Section
-   ====================== */
-   .hero {
-    text-align: center;
-    padding: 50px 20px;
-    background: none;
-    color: var(--primary-color);
-    position: relative; /* Needed for absolute positioning of children */
-    min-height: 300px; /* Ensure space for content */
-    z-index: 10; /* Higher than footer */
-    overflow: visible; /* Ensure submenus are not clipped */
-    display: flex;
-    flex: 1; /* Takes available space */
-    padding-bottom: 50px; /* Space before footer */
-}
-/* Dynamic Background */
-/*
-.dynamic-background {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    z-index: 1000; 
-    transition: opacity 0.3s ease, visibility 0.3s ease; 
-}
-*/
-.dynamic-background.hidden {
-    opacity: 0; /* Make the background invisible */
-    visibility: hidden; /* Prevent interaction with the background */
-}
 
-/* ======================
-   Footer Section
-   ====================== */
-   footer {
-    background-color: var(--primary-color);
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    z-index: 1000; /* Ensure it stays on top */
-    margin-top: auto; /* Pushes footer down */
-}
-footer p {
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-
-/* ======================
-   Header Section
-   ====================== */
-header {
-    font-family: 'LuluFontTH', sans-serif;
+/* ===== HEADER STYLES ===== */
+.header {
     position: sticky;
     top: 0;
-    z-index: 1000;
-    background-color: #fff;
+    background: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 1rem;
 }
 
-/* Top Section with Unified Background */
-.top-section {
-    position: relative;
-    width: auto;
-    height: 200px; /* Adjust height as needed */
-    overflow: hidden;
-    z-index: 1000; /* Ensure it stays on top */
+.header-content {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content vertically */
-    align-items: left;
+    gap: 0.5rem;
 }
 
-/* Top Content (Welcome word + Logo. Tagline Text under them) */
-/* Header Layout */
-.top-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-}
-
-.top-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-}
-
-/* Welcome section styling */
-.welcome-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-}
-
-.welcome-line {
-    font-family: 'LuluFontTH', sans-serif;
+.branding {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 1rem;
 }
 
 .welcome-text {
-    font-family: 'LuluFontTH', sans-serif !important;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
-    margin: 0;
+    font-size: 2rem;
     white-space: nowrap;
 }
 
-.tagline {
-    font-family: 'LuluFontTH', sans-serif !important;
-    font-size: 1.3rem;
-    color: #666;
-    margin: 0;
-    padding-left: 10px;
-    letter-spacing: 0.5px;
-}
-
-.logo-image {
-    height: 60px; /* Adjust as needed */
+.logo {
+    height: 50px;
     width: auto;
-    margin-left: 10px;
 }
 
-.horizontal-menu {
-    margin-left: auto;
+.tagline {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    padding-left: 0.5rem;
 }
-/* ======================
-   Horizontal Menu
-   ====================== */
-.horizontal-menu {
+
+/* ===== MENU STYLES ===== */
+.main-menu {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative; /* Ensure submenus are positioned relative to this */
-    z-index: 1000;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.menu-item-container {
+    position: relative;
 }
 
 .menu-item {
@@ -202,262 +87,92 @@ header {
     border: none;
     font-family: 'LuluFontTH', sans-serif;
     font-size: 1rem;
-    color: var(--primary-color);
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    transition: color 0.3s ease, background-color 0.3s ease;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-align: center;
-    width: var(--menu-item-width);
-    height: var(--menu-item-height);
-    z-index: inherit;
-}
-/* Add these fixes to your CSS */
-.hero {
-    position: relative;
-    min-height: 60vh; /* Adjust as needed */
-    padding: 20px;
+    transition: background-color 0.2s;
 }
 
-.menu-item-container {
-    position: relative;
-    display: inline-block;
+.menu-item:hover {
+    background-color: #f0f0f0;
 }
 
 .submenu {
-    display: none;
     position: absolute;
     top: 100%;
     left: 0;
     background: white;
     min-width: 200px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 1001;
     border-radius: 4px;
+    display: none;
+    z-index: 1001;
 }
 
 .submenu.show {
     display: block;
 }
 
-
-/* Menu Item Container */
-
-.submenu-container {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 200px; /* Adjust as needed */
-    background: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 1000;
-    display: block !important; /* Force show */
-}
-.submenu-container.show {
-    display: block;
-}   
-.menu-item-container {
-    position: relative; /* Submenu will be positioned relative to this */
-    margin: 0 10px;
-}
-
 .submenu-item {
     display: block;
     width: 100%;
-    padding: 8px 16px;
+    padding: 0.5rem 1rem;
     text-align: left;
     background: none;
     border: none;
     cursor: pointer;
-    font-family: 'LuluFontTH', sans-serif;
-    font-size: 1rem;
-    color: var(--primary-color);
-    transition: background-color 0.3s ease;
-    z-index: inherit;
+    transition: background-color 0.2s;
 }
 
 .submenu-item:hover {
-    background-color: #f0f0f0;
+    background-color: #f5f5f5;
 }
 
-.submenu-item-container {
-    position: relative;
-    display: inline-block;
+/* ===== CONTENT AREA ===== */
+.content-area {
+    flex: 1;
+    padding: 2rem;
 }
 
-
-
-/* ======================
-   Content Container
-   ====================== */
-.content-container {
-    position: relative;
-    width: 100%;
-    min-height: 400px;
+.content-display {
     background: white;
-    margin-top: 20px;
-    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-height: 300px;
+    padding: 1.5rem;
 }
 
-.content-container.show {
-    display: block;
-}
-.rotating-globe {
-    position: fixed;
-    top: 0%;
-    left: 0%;
-    transform-origin: center;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: auto;
-    animation: spin 10s infinite linear;
-    perspective: 1000px;
-}
-
-.globe-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.dropping-smartphone {
-    position: fixed;
-    top: 20%;
-    left: 70%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: auto;
-    z-index: 2;
-    animation: drop-sync 10s ease-in-out infinite;
-}
-
-.smartphone-image {
-    width: 70%;
-    height: auto;
-    display: block;
-    opacity: 1;
-    background-color: transparent;
-}
 .project-box {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    width: 80%;
+    gap: 1rem;
     max-width: 600px;
+    margin: 0 auto;
 }
 
 .project-image {
     width: 100%;
     max-width: 300px;
-    height: auto;
     border-radius: 8px;
-    margin-bottom: 20px;
+    align-self: center;
 }
 
-.project-box h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: var(--primary-color);
+/* ===== FOOTER ===== */
+.footer {
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
 }
 
-.project-box p {
-    font-size: 1rem;
-    color: var(--secondary-color);
-    margin-bottom: 10px;
-}
-
-.project-box em {
-    font-style: italic;
-    color: var(--highlight-color);
-}
-
-
-
-/* Add to your CSS */
-.dynamic-background.paused {
-    animation-play-state: paused;
-    opacity: 0.3;
-    transition: opacity 0.3s ease;
-}
-
-/* Ensure Lulu font is applied */
-.welcome-line h1,
-.tagline {
-    font-family: 'Lulu', sans-serif;
-}
-
-/* Make the globe animation smoother */
-.rotating-globe {
-    animation: spin 20s infinite linear;
-}
-
-/* ======================
-   Media Queries
-   ====================== */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .horizontal-menu {
-        display: none; /* Hide the menu on smaller screens */
+    .header-content {
+        align-items: center;
     }
-
-    .menu-toggle {
-        display: block; /* Show the hamburger menu icon */
-        cursor: pointer;
-        font-size: 1.5rem;
-        color: var(--primary-color);
-    }
-
-    .horizontal-menu.show {
-        display: flex; /* Show the menu when toggled */
+    
+    .main-menu {
         flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-}
-
-/* ======================
-   Keyframes
-   ====================== */
-@keyframes spin {
-    from {
-        transform: rotateY(0deg);
-    }
-    to {
-        transform: rotateY(70deg);
-    }
-}
-
-@keyframes drop-sync {
-    0% {
-        transform: translate(-50%, -200px);
-        opacity: 0.5;
-    }
-    25% {
-        transform: translate(-50%, 200px);
-        opacity: 1;
-    }
-    40% {
-        transform: translate(-50%, 100px);
-        opacity: 1;
-    }
-    50% {
-        transform: translate(-50%, 200px);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, 200px);
-        opacity: 0;
+        align-items: flex-end;
     }
 }
