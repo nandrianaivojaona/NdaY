@@ -1,363 +1,423 @@
-/* General Reset */
-* {
+/* ======================
+   General Reset & Variables
+   ====================== */
+   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --menu-item-width: 150px;
+    --menu-item-height: 50px;
+    --submenu-width: 200px;
+    --primary-color: #333;
+    --secondary-color: #666;
+    --highlight-color: rgba(0, 123, 255, 0.8);
+    --background-color: #f9f9f9;
+}
+
+/* ======================
+   Typography & Fonts
+   ====================== */
+@font-face {
+    font-family: 'LuluFontTH';
+    src: url('assets/fonts/Lulucon-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'LuluFontTH', sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: var(--primary-color);
     background: url('assets/images/NdaY_community.png') no-repeat center center fixed;
-    background-size: auto;
-    background-color: transparent; /* Fallback color */
+    background-size: cover;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+/* ======================
+   Header Section
+   ====================== */
+ /* Header Section */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 10px; /* Reduce padding for compact layout */
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between logo and other elements */
 }
 
-/* Hero and Dynamic Background Section */
-.hero-dynamic {
-    position: relative;
+/* Background Image (Dimmed Logo) */
+header::background {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100vh;
-    overflow: hidden;
+    height: 100%;
+    background: url('assets/images/NdaY_Logo.png') no-repeat center center; /* Replace with your logo path */
+    background-size: contain; /* Ensure the logo scales properly */
+    opacity: 0.5; /* Dim the logo to 5% visibility */
+    z-index: -1; /* Place the background behind the content */
+}
+/* Sticky Header */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #f3f4f0; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 10px; /* Compact padding */
+    display: flex;
+    align-items: center; /* Vertically align content */
 }
 
+
+.top-section {
+    position: relative;
+    padding: 10px; /* Reduce padding to shrink the header */
+    height: auto; /* Allow the height to adjust based on content */
+    box-sizing: border-box; /* Include padding and borders in the element's total width and height */
+    overflow: hidden; /* Prevent overflow */
+}
+
+/* Top Content Container */
+.top-content {
+    display: flex;
+    gap: 10px; /* Add spacing between items */
+    height: 100%; /* Ensure content fills the available height */
+}
+
+/* Welcome Text Container */
+.welcome-text {
+    flex: 1; /* Allow text to take available space */
+    gap: 10px; /* Add spacing between h1, logo, and p */
+    color: #01270e; /* Adjust color as needed */
+    align-items: left;
+}
+
+/* Heading Style */
+.welcome-text h1 {
+    font-size: 1.5rem; /* Normal heading size */
+    text-align: left; /* Align text to the left */
+    margin: 0; /* Remove default margin */
+    color: #333; /* Dark gray color */
+}
+
+
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: center; /* Align logo vertically */
+}
+
+.logo-image {
+    max-width: 60px; /* Keep the logo size normal */
+    height: auto;
+    left: 50%;
+}
+/* Tagline (Right) */
+.tagline {
+    flex: 1; /* Allow tagline to take available space */
+    text-align: right; /* Align text to the right */
+}
+
+.tagline p {
+    font-size: 1rem; /* Normal tagline size */
+    margin: 0; /* Remove default margin */
+    color: #666; /* Light gray color */
+}
+/* ======================
+   Horizontal Menu
+   ====================== */
+   .horizontal-menu {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1000;
+}
+.horizontal-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px; /* Add spacing between menu items */
+}
+
+.horizontal-menu li {
+    font-size: 1.1rem;
+    color: #fff; /* Menu item text color */
+}
+
+.horizontal-menu a {
+    text-decoration: none;
+    color: inherit; /* Inherit text color */
+    padding: 8px 12px; /* Add padding for clickable area */
+    border-radius: 4px; /* Optional: Rounded corners */
+}
+
+.horizontal-menu a:hover {
+    background-color: #555; /* Hover effect */
+}
+.menu-item-container {
+    position: relative; /* Required for absolute positioning of submenu */
+    display: inline-block; /* Ensures it wraps around the button */
+    padding: 5px; /* Adds space around the button */
+}
+
+.menu-item {
+    background: none;
+    border: none;
+    font-family: 'LuluFontTH', sans-serif;
+    font-size: 1rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: var(--menu-item-width);
+    height: var(--menu-item-height);
+}
+
+.menu-item:hover {
+    color: var(--highlight-color);
+    background-color: #f0f0f0;
+}
+
+.submenu-container {
+    display: none; /* Hidden by default */
+    position: absolute; /* Positioned relative to .menu-item-container */
+    top: 100%; /* Appears below the menu item */
+    left: 0; /* Aligns with the menu item */
+    background-color: #0a980d;
+    border: 2px solid #d60d0d;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 3000;
+    padding: 10px;
+    width: var(--submenu-width);
+}
+
+.menu-item-container:hover .submenu-container {
+    display: block; /* Shows the submenu on hover */
+}
+
+.submenu-item {
+    margin: 5px 0;
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submenu-item:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+
+/* Dynamic Background */
 .dynamic-background {
     position: relative;
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+    z-index: 1; /* Ensure it is below the content */
 }
 
-.fixed-bg {
-    position: fixed;
+.dynamic-background.hidden {
+    opacity: 0; /* Make the background invisible */
+    visibility: hidden; /* Prevent interaction with the background */
+}
+
+/* ======================
+   Content Container
+   ====================== */
+.content-container {
+    display: none;
+    position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: fit-content;
-    background: url('assets/images/NdaY_community.png') no-repeat center center;
-    background-size: cover;
-    background-color: transparent; /* Fallback color */
-    z-index: -1;
+    left: 220px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: visible;
 }
 
 .rotating-globe {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
+    transform-origin: center;
     transform: translate(-50%, -50%);
-    width: auto;
-    height: 100%;
-    animation: rotateGlobe 30s linear infinite;
-    perspective: 1000px;
+    width: 100vw; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    min-width: 100vw; /* Ensure it covers at least the full width */
+    min-height: 100vh; /* Ensure it covers at least the full height */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    perspective: 1000px; /* Maintain 3D effect */
+    animation: spin 10s infinite linear;
+    overflow: hidden; /* Prevent content from overflowing */
 }
 
 .globe-image {
-    width: auto;
-    height: 100%;
-    opacity: 0.5;
+    max-width: 100%; /* Ensure the image doesn't exceed the container width */
+    max-height: 100%; /* Ensure the image doesn't exceed the container height */
+    object-fit: contain; /* Scale the image proportionally */
 }
 
 .dropping-smartphone {
     position: fixed;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40%;
-    height: auto;
-    animation: dropIn 30s ease-in-out infinite;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Perfectly center the container */
+    width: 100vw; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 2;
+    animation: drop-sync 10s ease-in-out infinite;
 }
 
 .smartphone-image {
-    width: 100%;
-    height: auto;
+    max-width: 100%; /* Ensure the image doesn't exceed the container width */
+    max-height: 100%; /* Ensure the image doesn't exceed the container height */
+    object-fit: contain; /* Scale the image proportionally */
     display: block;
     opacity: 1;
     background-color: transparent;
 }
-
-/* Hero Section */
-.hero {
+.project-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    padding: 100px 20px;
-    color: #596376;
-    position: relative; /* Ensure it stays in the document flow */
-    z-index: 1; /* Ensure it appears above other elements */
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-}
-
-.hero .btn {
-    background: #fff;
-    color: #007BFF;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.hero .btn:hover {
-    background: #0056b3;
-    color: rgb(190, 245, 176);
-}
-
-/* Animations */
-@keyframes rotateGlobe {
-    from {
-        transform: translate(-50%, -50%) rotateY(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotateY(360deg);
-    }
-}
-
-@keyframes dropIn {
-    0% {
-        transform: translateY(-150%) translateX(-50%);
-        opacity: 0.2;
-    }
-    100% {
-        transform: translateY(-50%) translateX(-50%);
-        opacity: 0.6;
-    }
-}
-
-/* Sections */
-section {
-    position: relative;
-    padding: 50px 0;
-    text-align: center;
-}
-
-/* Project Card */
-.project-card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.9);
+    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
-    width: calc(33.33% - 20px);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: visible;
-    margin-bottom: 20px;
-}
-
-.project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-.project-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.project-card p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 10px;
-}
-
-/* Project Details */
-.project-details {
-    position: absolute;
-    top: 0;
-    left: calc(100% + 20px);
-    display: flex;
-    align-items: stretch;
-    gap: 10px;
-    transition: opacity 0.3s ease, left 0.3s ease;
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0;
-}
-
-.project-card:hover .project-details {
-    opacity: 1;
-    left: calc(100% + 10px);
-    pointer-events: auto;
-}
-
-.project-image-container {
-    width: 600px;
-    height: auto;
-    overflow: hidden;
-    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
 }
 
 .project-image {
-    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.project-text {
-    background: rgba(228, 217, 217, 0.9);
-    border: 1px solid #ddd;
+    max-width: 300px;
+    height: auto;
     border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: auto;
-    box-sizing: border-box;
-    display: flex;
-    align-items: left;
-    height: 100%;
+    margin-bottom: 20px;
 }
 
-.testimonial-box {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: calc(100% + 20px);
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    max-width: 100%;
-    z-index: 1000;
+.project-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
 }
 
-.project-card:hover .testimonial-box {
-    display: block;
-    animation: fadeIn 0.3s ease-in-out;
+.project-box p {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
 }
 
-@keyframes fadeIn {
+.project-box em {
+    font-style: italic;
+    color: var(--highlight-color);
+}
+
+/* ======================
+   Footer Section
+   ====================== */
+footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ======================
+   Media Queries
+   ====================== */
+@media (max-width: 768px) {
+    .horizontal-menu {
+        display: none; /* Hide the menu on smaller screens */
+    }
+
+    .menu-toggle {
+        display: block; /* Show the hamburger menu icon */
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+    }
+
+    .horizontal-menu.show {
+        display: flex; /* Show the menu when toggled */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* ======================
+   Keyframes
+   ====================== */
+@keyframes spin {
     from {
-        opacity: 0;
+        transform: rotateY(0deg);
     }
     to {
+        transform: rotateY(70deg);
+    }
+}
+
+@keyframes drop-sync {
+    0% {
+        transform: translate(-50%, -200px);
+        opacity: 0.5;
+    }
+    25% {
+        transform: translate(-50%, 200px);
         opacity: 1;
     }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .project-details {
-        flex-direction: column;
-        left: 0;
-        top: 100%;
-        margin-top: 20px;
+    40% {
+        transform: translate(-50%, 100px);
+        opacity: 1;
     }
-
-    .project-image-container,
-    .project-text,
-    .testimonial-box {
-        flex-basis: 100%;
-        margin-bottom: 10px;
+    50% {
+        transform: translate(-50%, 200px);
+        opacity: 1;
     }
-}
-
-@media (max-width: 480px) {
-    .project-card {
-        width: 100%;
+    100% {
+        transform: translate(-50%, 200px);
+        opacity: 0;
     }
-
-    .project-details {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .project-image-container,
-    .project-text,
-    .testimonial-box {
-        flex-basis: 100%;
-        max-width: 100%;
-    }
-}
-
-/* Contact Section */
-.contact form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.contact input, .contact textarea {
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.contact .btn {
-    background: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.contact .btn:hover {
-    background: #0056b3;
-}
-
-/* Footer */
-footer {
-    background: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-
-/* NdaY' Image Alignment */
-.ndai-word {
-    display: inline-block;
-    vertical-align: baseline;
-    font-size: inherit;
-    line-height: inherit;
-    width: 1em;
-    height: 1em;
-    background: url('assets/images/NdaY_word.png') no-repeat center center;
-    background-size: contain;
-    margin: 0 0.1em;
-    text-indent: -9999px;
-    overflow: hidden;
-}
-
-h1 .ndai-word,
-h2 .ndai-word,
-h3 .ndai-word {
-    height: calc(1.5em + 0.3em);
-}
-
-button .ndai-word {
-    height: calc(1em + 0.1em);
-    margin: 0 0.2em;
-}
-
-@media (max-width: 768px) {
-    .ndai-word {
-        width: 0.8em;
-        height: 0.8em;
-    }
-}
-
-@media (max-width: 480px) {
-    .ndai-word {
-        width: 0.6em;
-        height: 0.6em;
-    }
-}
-
-.ndai-word:hover {
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
 }
