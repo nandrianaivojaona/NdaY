@@ -43,7 +43,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #fff; /* White background */
+    background-color: #5e615d; /* NdaY'Color background */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     padding: 10px; /* Reduce padding for compact layout */
     display: flex; /* Use flexbox for layout */
@@ -52,15 +52,14 @@ header {
 
 /* Background Image (Dimmed Logo) */
 header::background {
-    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('assets/images/NdaY_Logo.png') no-repeat center center; /* Replace with your logo path */
+    background: url('assets/images/NdaY_Logo.png') no-repeat center; /* Replace with your logo path */
     background-size: contain; /* Ensure the logo scales properly */
-    opacity: 0.5; /* Dim the logo to 5% visibility */
+    opacity: 0.05; /* Dim the logo to 5% visibility */
     z-index: -1; /* Place the background behind the content */
 }
 /* Sticky Header */
@@ -68,45 +67,44 @@ header::background {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #f3f4f0; /* White background */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #e1f7dc; /* NdaY'Color background */
+    box-shadow: 0 4px 8px rgba(1, 73, 1, 0.1); /* Subtle shadow */
     padding: 10px; /* Compact padding */
-    display: flex;
-    align-items: center; /* Vertically align content */
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between logo and other elements */
+    align-items: left; /* Center items vertically */
+    width: 100%; /* Full width */
+    height: 100px; /* Fixed height */
 }
-
-
-.top-section {
-    position: relative;
-    padding: 10px; /* Reduce padding to shrink the header */
-    height: auto; /* Allow the height to adjust based on content */
-    box-sizing: border-box; /* Include padding and borders in the element's total width and height */
-    overflow: hidden; /* Prevent overflow */
+.header-content {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between logo and other elements */
+    align-items: center; /* Center items vertically */
+    width: 100%; /* Full width */
+    padding: 0 20px; /* Add padding for spacing */
 }
-
-/* Top Content Container */
-.top-content {
-    display: flex;
-    gap: 10px; /* Add spacing between items */
-    height: 100%; /* Ensure content fills the available height */
-}
-
 /* Welcome Text Container */
 .welcome-text {
     flex: 1; /* Allow text to take available space */
     gap: 10px; /* Add spacing between h1, logo, and p */
     color: #01270e; /* Adjust color as needed */
-    align-items: left;
+    text-align: left;
+    margin:0; /* Remove default margin */
+    padding: 0 20px; /* Add padding for spacing */
+    font-family: 'LuluFontTH', sans-serif; /* Use the custom font */
 }
 
 /* Heading Style */
 .welcome-text h1 {
-    font-size: 1.5rem; /* Normal heading size */
+    left:0%; /* Align text to the left */
+    font-size: 2rem; /* Normal heading size */
     text-align: left; /* Align text to the left */
     margin: 0; /* Remove default margin */
     color: #333; /* Dark gray color */
+    font-family: 'LuluFontTH', sans-serif; /* Use the custom font */
+    font-weight: 700; /* Bold weight */
+    text-shadow: 1px 1px 2px rgba(2, 73, 1, 0.14); /* Subtle shadow */
 }
-
 
 /* Logo Container */
 .logo-container {
@@ -115,7 +113,7 @@ header::background {
 }
 
 .logo-image {
-    max-width: 60px; /* Keep the logo size normal */
+    max-width: 100px; /* Keep the logo size normal */
     height: auto;
     left: 50%;
 }
@@ -126,9 +124,16 @@ header::background {
 }
 
 .tagline p {
-    font-size: 1rem; /* Normal tagline size */
     margin: 0; /* Remove default margin */
-    color: #666; /* Light gray color */
+    color: #153603; /* Adjust color as needed */
+    font-style: italic; /* Italicize tagline */
+    font-weight: lighter; /* Use 'lighter' instead of an invalid value like '10' */
+    text-align: right; /* Align text to the right */
+    padding: 0 60px; /* Add padding for spacing */
+    font-family: 'LuluFontTH', sans-serif; /* Use the custom font */
+    font-size: 0.7rem; /* Adjust font size */
+    letter-spacing: 1px; /* Add space between characters (adjust as needed) */
+    word-spacing: 2px; /* Add space between words (optional) */
 }
 /* ======================
    Horizontal Menu
@@ -258,8 +263,8 @@ header::background {
 
 .rotating-globe {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 60%;
+    left: 50%;
     transform-origin: center;
     transform: translate(-50%, -50%);
     width: 100vw; /* Full width of the viewport */
@@ -270,7 +275,7 @@ header::background {
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     perspective: 1000px; /* Maintain 3D effect */
-    animation: spin 10s infinite linear;
+    animation: spin-and-fade 11s infinite linear;
     overflow: hidden; /* Prevent content from overflowing */
 }
 
@@ -387,15 +392,19 @@ footer p {
     }
 }
 
-/* ======================
-   Keyframes
-   ====================== */
-@keyframes spin {
-    from {
-        transform: rotateY(0deg);
+/* Keyframes for spinning and fading */
+@keyframes spin-and-fade {
+    0% { /* Spin for 90% of the time (0% to 90%) */
+        opacity: 1; /* Fully visible */
+        transform: translate(-50%,-50%) rotateY(0deg); /* Start rotation */
     }
-    to {
-        transform: rotateY(70deg);
+    90% { /* Fade out over 5% of the time (90%) */
+        opacity: 1; /* Still fully visible */
+        transform: translate(-50%, -50%) rotateY(90deg); /* Continue rotation */
+    }
+    95%, 100% { /* Pause and fade out over 5% of the time (95% to 100%) */
+        opacity: 0; /* Fade out completely */
+        transform: rotateY(90deg); /* Complete one full rotation */
     }
 }
 
